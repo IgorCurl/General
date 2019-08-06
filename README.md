@@ -1,4 +1,4 @@
-## Instructions for running the "watchdog" script##
+##  Instructions for running the "watchdog" script
 
 ## PREREQUIREMENT
 #Create a user for the service (without home directory)
