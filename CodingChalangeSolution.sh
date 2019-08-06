@@ -1,26 +1,26 @@
 #!/bin/bash
- 
-##set the path ##this works for Ubuntu 14.04 and 16.04
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-##Path to the Config file with variables
-. /usr/bin/watchdog.config 
+## IMPORTANT: This Script assumes that you have "mail" utility installed and configured. 
 
-##TO BE USED IF CONFIG FILE IS NOT AVAILABLE
-##set your email address 
-#EMAIL="email@yourdomain.com"
-##service that you want to check?
-#X=
-##pause time between service checks?
-#SLEEP_X=60
-##how many times should the restart be attempted? 
-#REPEAT_M=4
-##pause time between restart attempts?
-#SLEEP_N=15
+##Location of the Config files with variables
+source /etc/CodingChalangeSolution.conf
 
+## Error handling ##
+# set exit-on-error mode:
+set -e
+#trap the exit signal instead of the error
+trap 'catch $? $LINENO' EXIT
+#make sure we ended up in catch based on an error
+catch() {
+  echo "Catching the error:"
+  if [ "$1" != "0" ]; then
+    # error handling goes here
+    echo "Error $1 occurred on $2"
+  fi
+}
 
-##LOOP THE SCRIPT
-while :; do
+##Continue execution until forcibly interrupted (with kill or Ctrl+C)
+while true; do
  
     ###CHECK SERVICE####
     `pgrep $X >/dev/null 2>&1`
@@ -36,17 +36,17 @@ while :; do
             ##append to the log file##
             echo "Service $SERVICE is down" >> /var/log/watchdog.log
 
-            ##set restart counter to 0##
+            ##Set the counter to 0##
             n=0
             until [ $n -ge $REPEAT_M ]
             do
-                ##TRY TO RESTART THAT SERVICE###
+                ##TRY TO RESTART THE SERVICE###
                 service $X start && break  
                 n=$[$n+1]
                 sleep $SLEEP_N
             done
 
-            ##set the restart counter Y##
+            ##Set the restart counter Y##
             Y=$[$n+1]
 
             ##CHECK IF RESTART WORKED###
