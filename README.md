@@ -1,6 +1,6 @@
-##Instructions for running the "watchdog" script##
+## Instructions for running the "watchdog" script##
 
-##PREREQUIREMENT
+## PREREQUIREMENT
 #Create a user for the service (without home directory)
 sudo useradd -M watchdog
 #Prevent Logging in with the user
@@ -11,10 +11,10 @@ sudo usermod -L watchdog
 sudo wget https://raw.githubusercontent.com/IgorCurl/General/master/CodingChalangeSolution.sh -O /usr/bin/CodingChalangeSolution.sh
 #Download the unit file from GitHub repository
 sudo wget https://raw.githubusercontent.com/IgorCurl/General/master/watchdog.service -O /etc/systemd/system/watchdog.service
-# Download the config file into /etc (preferred directory of the configuration files)
+#Download the config file into /etc (preferred directory of the configuration files)
 sudo wget https://raw.githubusercontent.com/IgorCurl/General/master/CodingChalangeSolution.conf -O /etc/CodingChalangeSolution.conf
 
-##CONFIGURE THE SERVICE
+## CONFIGURE THE SERVICE
 #Set "execute" permission for the script
 sudo chmod +x /usr/bin/CodingChalangeSolution.sh
 #Edit the configuration parameters (follow instructions in the .conf file)
