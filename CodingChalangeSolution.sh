@@ -5,21 +5,21 @@
 ##Location of the Config files with variables
 source /etc/CodingChalangeSolution.conf
 
-## Error handling ##
+## ERROR HANDLING##
 # set exit-on-error mode:
 set -e
-#trap the exit signal instead of the error
+#trap the exit signal instead of the error#
 trap 'catch $? $LINENO' EXIT
-#make sure we ended up in catch based on an error
+#make sure we ended up in catch based on an error#
 catch() {
   echo "Catching the error:"
   if [ "$1" != "0" ]; then
-    # error handling goes here
+    # error handling goes here#
     echo "Error $1 occurred on $2"
   fi
 }
 
-##Continue execution until forcibly interrupted (with kill or Ctrl+C)
+##Continue execution until forcibly interrupted (with kill or Ctrl+C)##
 while true; do
  
     ###CHECK SERVICE####
