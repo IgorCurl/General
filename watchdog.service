@@ -1,0 +1,13 @@
+[Unit]
+Description=Watchdog service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=watchdog
+ExecStart=/usr/bin/CodingChallengeSolution.sh
+
+[Install]
+WantedBy=multi-user.target
